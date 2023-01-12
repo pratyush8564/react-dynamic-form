@@ -6,14 +6,18 @@ const App = () => {
 const [fullName, setFullName] = useState({
   fname : '',
   lname: '',
+  email: '',
+  phone:'',
 });
 
   const inputEvent = (event) => {
     console.log(event.target.value);
     console.log(event.target.name);
 
-    const value = event.target.value;
-    const name = event.target.name;
+    // const value = event.target.value;
+    // const name = event.target.name;
+
+    const {value,name} = event.target;
 
     setFullName((preValue) =>{
     //  console.log(preValue); 
@@ -21,11 +25,31 @@ const [fullName, setFullName] = useState({
   return{
     fname: value,
     lname: preValue.lname,
+    email: preValue.email,
+    phone: preValue.phone,
   };
 }else if (name === 'lName'){
   return{
     fname: preValue.fname,
     lname: value,
+    email: preValue.email,
+    phone: preValue.phone,
+  };
+}
+else if (name === 'email'){
+  return{
+    fname: preValue.fname,
+    lname: preValue.lname,
+    email: value,
+    phone: preValue.phone,
+  };
+}
+else if (name === 'phone'){
+  return{
+    fname: preValue.fname,
+    lname: preValue.lname,
+    email: preValue.email,
+    phone: value,
   };
 }
   });
@@ -42,6 +66,8 @@ const [fullName, setFullName] = useState({
       <form onSubmit={onSubmits}>
        <div> 
       <h1> Hello {fullName.fname} {fullName.lname} </h1>
+      <p> {fullName.email} </p>
+      <p> {fullName.phone} </p>
       <input type="text" placeholder="Enter Your Name" 
       name='fName'
       onChange={inputEvent}
@@ -52,6 +78,16 @@ const [fullName, setFullName] = useState({
       name='lName'
       onChange={inputEvent}
       value={fullName.lname}
+      />
+      <input type="email" placeholder="Enter Your email" 
+      name='email'
+      onChange={inputEvent}
+      value={fullName.email}
+      />
+      <input type="number" placeholder="Enter Your phone number" 
+      name='phone'
+      onChange={inputEvent}
+      value={fullName.phone}
       />
     <button type='submit'>Click Me</button>
    </div>
